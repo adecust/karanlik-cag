@@ -11,6 +11,7 @@ G.SFX = {
     if (level !== undefined) this.level = G.clamp(level, 0, 1);
     if (muted !== undefined) this.muted = muted;
     if (this.master) this.master.gain.setTargetAtTime(this.vol, this.ctx.currentTime, 0.02);
+    if (G.Music) G.Music.apply(); // M tuşu müziği de susturur
     try { localStorage.setItem('karanlik.ses', JSON.stringify({ level: this.level, muted: this.muted })); } catch (e) { /* depolama kapalı */ }
   },
   init() {

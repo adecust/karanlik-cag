@@ -197,6 +197,7 @@ G.loop = (now) => {
     G.update(dt * k);
   } else if (G.mode !== 'play') { G.Ground.update(dt); G.updateParts(dt); }
   G.render(dt);
+  G.Music.update();
   if (G.Bake.jobs.length) G.Bake.tick(6); // kalan heykeller arka planda
   requestAnimationFrame(G.loop);
 };
