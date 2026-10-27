@@ -296,9 +296,9 @@ G.Live = {
     r.toneMappingExposure = 1.05;
     this.r = r; this.cv = cv;
     const s = new THREE.Scene();
-    s.add(new THREE.HemisphereLight(0x46566e, 0x060504, 0.55));
-    const rim = new THREE.DirectionalLight(0x7088c8, 1.3); rim.position.set(0.6, 1, -1); s.add(rim); s.add(rim.target);
-    const moon = new THREE.DirectionalLight(0xaab4d0, 0.35); moon.position.set(-1, 2, 1); s.add(moon); s.add(moon.target);
+    s.add(new THREE.HemisphereLight(0x5a6c88, 0x0e0c0a, 1.5)); // uzaktaki yaratıklar da seçilsin
+    const rim = new THREE.DirectionalLight(0x7088c8, 1.9); rim.position.set(0.6, 1, -1); s.add(rim); s.add(rim.target);
+    const moon = new THREE.DirectionalLight(0xaab4d0, 1.1); moon.position.set(-1, 2, 1); s.add(moon); s.add(moon.target);
     this.torch = new THREE.PointLight(0xff9a50, 900, 0, 1.15); s.add(this.torch);
     this.fires = [0, 1, 2, 3].map(() => { const l = new THREE.PointLight(0xff7a30, 0, 0, 1.2); s.add(l); return l; });
     this.scene = s;
@@ -333,6 +333,7 @@ G.Live = {
       }
       if (n < PW * PH * 0.22) continue; // kırıntılar atlanır → temiz silüet
       r /= n * 255; g /= n * 255; b /= n * 255;
+      r = Math.pow(r, 0.6); g = Math.pow(g, 0.6); b = Math.pow(b, 0.6); // koyular kalkar: uzaktaki yaratık da seçilir
       const cov = n / (PW * PH), lum = 0.3 * r + 0.55 * g + 0.15 * b;
       // iç hücre: yoğunluk rampası; kenar hücresi: silüete uyan karakter (net kontur)
       // her hücre dolu yoğunluk harfi; kenarlar biraz sönük (kontur haleden gelir)
