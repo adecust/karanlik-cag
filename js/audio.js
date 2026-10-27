@@ -1,7 +1,7 @@
 'use strict';
 // Dosyasız, prosedürel 8-bit ses efektleri (WebAudio)
 G.SFX = {
-  ctx: null, muted: false, last: {}, level: 0.5, // level: ayarlardaki ses (0-1)
+  ctx: null, muted: false, last: {}, level: 0.3, // level: ayarlardaki ses (0-1); varsayılan kısık, oyuncu açabilir
   get vol() { return this.muted ? 0 : this.level * 0.7; },
   // ses ayarı: kaydedilir, açık ses bağlamına hemen uygulanır
   load() {
