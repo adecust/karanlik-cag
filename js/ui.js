@@ -139,9 +139,19 @@ G.UI = {
     const sk = c.skills.map((id, i) => { const s = G.SKILLS[id]; return `<span style="color:${s.color}">${['SOL TIK', '1', '2', '3'][i].padEnd(8)}${s.name.padEnd(17)}</span><span class="dim">${p.lv >= s.lv ? s.mp + ' mp · ' + s.cd + ' sn' : 'Sv ' + s.lv + ' gerekli'}</span>`; }).join('\n');
     const el = this.show(`<div class="panel big"><div class="pn">DURAKLATILDI — ${c.name} Sv ${p.lv}</div>
       <pre class="stats">saldırı ${Math.round(p.atk)}   zırh ${Math.round(p.armor)}   silah +${p.wup}   zırh +${p.aup}\n\n${sk}</pre>
+      <div class="vol"><span>SES</span><input type="range" id="vol" min="0" max="100" step="5" value="${Math.round(G.SFX.level * 100)}"><b id="volv"></b>
+        <button class="btn" id="mute"></button></div>
       <div class="btns"><button class="btn" id="res">[ DEVAM ]</button><button class="btn" id="menu">[ KAYDET & ÇIK ]</button></div></div>`);
     el.querySelector('#res').addEventListener('click', () => G.togglePause());
     el.querySelector('#menu').addEventListener('click', () => { G.save(); G.toMenu(); });
+    // ses ayarı: kaydırıcı + sessiz düğmesi (M tuşu da sessize alır)
+    const vol = el.querySelector('#vol'), volv = el.querySelector('#volv'), mute = el.querySelector('#mute');
+    const sync = () => { volv.textContent = vol.value.padStart(3) + '%'; mute.textContent = G.SFX.muted ? '[ SESİ AÇ · M ]' : '[ SESSİZ · M ]'; el.querySelector('.vol').classList.toggle('off', G.SFX.muted); };
+    vol.addEventListener('input', () => { G.SFX.set(vol.value / 100, false); sync(); });
+    vol.addEventListener('change', () => G.SFX.play('gem'));
+    mute.addEventListener('click', () => { G.SFX.set(undefined, !G.SFX.muted); sync(); });
+    this.syncVol = sync;
+    sync();
   },
 
   death() {

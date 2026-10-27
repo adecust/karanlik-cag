@@ -113,3 +113,13 @@ pre { font-family: inherit; line-height: 1.15; }
 .chest { font-size: 17px; white-space: pre; color: #c8904a; font-weight: 700; }
 .chest.open { color: #ffd84a; text-shadow: 0 0 14px #ff9a3c; }
 .chest.dead { color: #e8e2d0; text-shadow: 0 0 14px #c0392b; }
+
+/* ses ayarı (duraklatma menüsü) */
+.vol { display: flex; align-items: center; gap: 10px; margin-top: 12px; white-space: pre; }
+.vol span { color: #fff; font-weight: 700; }
+.vol b { color: #e8e2d0; font-weight: 400; min-width: 4ch; }
+.vol .btn { font-size: 12px; padding: 3px 10px; margin-left: auto; }
+.vol.off input, .vol.off b { opacity: .35; }
+.vol input[type=range] { -webkit-appearance: none; appearance: none; flex: 1; min-width: 120px; height: 13px; background: #000; border: 1px solid #bdbdbd; cursor: pointer; }
+.vol input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 9px; height: 13px; background: #e8e8e8; border: 0; }
+.vol input[type=range]::-moz-range-thumb { width: 9px; height: 13px; background: #e8e8e8; border: 0; border-radius: 0; }

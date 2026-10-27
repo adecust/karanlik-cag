@@ -1,7 +1,18 @@
 'use strict';
 // Dosyasız, prosedürel 8-bit ses efektleri (WebAudio)
 G.SFX = {
-  ctx: null, muted: false, last: {}, vol: 0.35,
+  ctx: null, muted: false, last: {}, level: 0.5, // level: ayarlardaki ses (0-1)
+  get vol() { return this.muted ? 0 : this.level * 0.7; },
+  // ses ayarı: kaydedilir, açık ses bağlamına hemen uygulanır
+  load() {
+    try { const s = JSON.parse(localStorage.getItem('karanlik.ses')); if (s) { if (Number.isFinite(+s.level)) this.level = G.clamp(+s.level, 0, 1); this.muted = !!s.muted; } } catch (e) { /* depolama kapalı */ }
+  },
+  set(level, muted) {
+    if (level !== undefined) this.level = G.clamp(level, 0, 1);
+    if (muted !== undefined) this.muted = muted;
+    if (this.master) this.master.gain.setTargetAtTime(this.vol, this.ctx.currentTime, 0.02);
+    try { localStorage.setItem('karanlik.ses', JSON.stringify({ level: this.level, muted: this.muted })); } catch (e) { /* depolama kapalı */ }
+  },
   init() {
     if (this.ctx) return;
     try {
@@ -59,3 +70,4 @@ G.SFX = {
     }
   },
 };
+G.SFX.load();

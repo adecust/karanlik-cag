@@ -210,7 +210,7 @@ G.onKey = (code) => {
     if (inMenu) return;
   }
   if (code === 'Escape') G.togglePause();
-  if (code === 'KeyM') G.SFX.muted = !G.SFX.muted;
+  if (code === 'KeyM') { G.SFX.set(undefined, !G.SFX.muted); if (G.menuOpen === 'pause' && G.UI.syncVol) G.UI.syncVol(); }
   if (G.mode !== 'play' || G.S.paused || G.S.dead) return;
   const m = code.match(/^Digit([1-3])$/);
   if (m) G.useSkill(+m[1]);
