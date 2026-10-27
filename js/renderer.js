@@ -110,7 +110,7 @@ G.R = {
     for (let y = 0; y < this.rows; y++) for (let x = 0; x < this.cols; x++) {
       const dx = (x / this.cols - 0.5) * 2, dy = (y / this.rows - 0.5) * 2;
       const d = Math.sqrt(dx * dx * 0.7 + dy * dy * (dy > 0 ? 1.7 : 0.75));
-      this.vig[y * this.cols + x] = 1 - G.clamp((d - 0.45) / 0.65, 0, 1) * 0.92;
+      this.vig[y * this.cols + x] = 1 - G.clamp((d - 0.55) / 0.7, 0, 1) * 0.8;
     }
     this.buildAtlas();
   },
@@ -323,7 +323,7 @@ G.R = {
       }
       if (this.desat > 0) { const d = this.desat, gr = (r + g + b) / 3; r += (gr * 0.78 - r) * d; g += (gr * 0.9 - g) * d; b += (gr * 1.2 - b) * d; }
       // yumuşak ton eşleme: patlayan sarı yerine film gibi doygunluk
-      r = r > 0 ? 1 - Math.exp(-r * 1.4) : 0; g = g > 0 ? 1 - Math.exp(-g * 1.4) : 0; b = b > 0 ? 1 - Math.exp(-b * 1.4) : 0;
+      r = r > 0 ? 1 - Math.exp(-r * 1.65) : 0; g = g > 0 ? 1 - Math.exp(-g * 1.65) : 0; b = b > 0 ? 1 - Math.exp(-b * 1.65) : 0;
       const o = i * 4;
       out[o] = r * 255; out[o + 1] = g * 255; out[o + 2] = b * 255;
       out[o + 3] = this.ch[i];
