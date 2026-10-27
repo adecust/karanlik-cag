@@ -9,7 +9,7 @@ const mf = (m) => 440 * Math.pow(2, (m - 69) / 12);
 const hash = (n) => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
 
 G.Music = {
-  on: false, mode: null, level: 0.3, // varsayılan kısık step: 0, next: 0,
+  on: false, mode: null, level: 0.3, step: 0, next: 0, // level: varsayılan kısık
   get vol() { return G.SFX.muted ? 0 : this.level * 0.55; },
   load() {
     try { const s = JSON.parse(localStorage.getItem('karanlik.muzik')); if (s && Number.isFinite(+s.level)) this.level = G.clamp(+s.level, 0, 1); } catch (e) { /* depolama kapalı */ }
