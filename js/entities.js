@@ -137,7 +137,7 @@ G.updatePlayer = (p, dt) => {
   // kasırga
   if (p.whirl > 0) {
     p.whirl -= dt; p.whirlT -= dt;
-    if (p.whirlT <= 0) { p.whirlT = 0.22; G.slash(p, Math.random() * 6.28, 76, Math.PI, p.atk * 0.7, '#ff5a3a', true); }
+    if (p.whirlT <= 0) { p.whirlT = 0.22; G.slash(p, Math.random() * 6.28, 105, Math.PI, p.atk * 0.7, '#ff5a3a', true); }
   }
   // yenilenme
   p.mp = Math.min(p.maxMp, p.mp + (1.5 + p.maxMp * 0.012) * dt);
