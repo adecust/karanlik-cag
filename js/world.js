@@ -213,7 +213,7 @@ G.World = {
     merchant: [0.8, 0.4],
   },
   ambientAt(x) {
-    const A = { town: [0.4, 0.4, 0.47], forest: [0.33, 0.39, 0.44], grave: [0.28, 0.31, 0.41], ember: [0.42, 0.28, 0.24], abyss: [0.25, 0.18, 0.32] };
+    const A = { town: [0.48, 0.48, 0.56], forest: [0.4, 0.47, 0.53], grave: [0.34, 0.38, 0.49], ember: [0.5, 0.34, 0.29], abyss: [0.3, 0.22, 0.38] };
     const i = this.zoneIdx(x), z = G.ZONES[i], a = A[z.id];
     const nz = G.ZONES[i + 1];
     if (nz && z.x1 - x < 400) { const b = A[nz.id], k = 1 - (z.x1 - x) / 400; return a.map((v, j) => G.lerp(v, b[j], k * 0.5)); }
