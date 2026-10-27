@@ -234,7 +234,7 @@ G.updateEnemy = (e, dt, frame) => {
     } else {
       const far = Math.hypot(e.x - e.homeX, e.y - e.homeY);
       if (S.dead || (e.camp && far > 720)) e.state = 'return';
-      const reach = e.rad + p.rad + 4;
+      const reach = e.rad + p.rad + 30; // figürler iç içe girmeden, kol/pençe mesafesinden vurur
       vx = nx * e.spd; vy = ny * e.spd;
       switch (e.d.ai) {
         case 'flutter': { const s = Math.sin(e.wob * 6) * 0.9; vx += -ny * e.spd * s; vy += nx * e.spd * s; break; }
@@ -247,7 +247,14 @@ G.updateEnemy = (e, dt, frame) => {
           break;
         }
       }
-      if (dist < reach && e.st !== 2) { vx *= 0.1; vy *= 0.1; }
+      // vuruş mesafesine girince oyuncuya doğru ilerlemez (atılma da orada biter) → iç içe girmez
+      if (dist < reach) {
+        if (e.st === 2) { e.st = 0; e.timer = G.rand(1.8, 2.6); }
+        const toward = vx * nx + vy * ny;
+        if (toward > 0) { vx -= toward * nx; vy -= toward * ny; }
+        vx *= 0.3; vy *= 0.3;
+        if (dist < reach * 0.6) { vx -= nx * e.spd * 0.8; vy -= ny * e.spd * 0.8; } // fazla yakınsa geri çekil
+      }
       if (dist < reach + 4 && e.atkT <= 0 && !S.dead) {
         e.atkT = 1.15; e.lunge = 0.15; e.atkAnim = 0.5; G.hurtPlayer(e.dmg);
       }

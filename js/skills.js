@@ -160,7 +160,7 @@ G.healFx = (p, amt, color) => {
 
 // ───────────── Yetenek davranışları ─────────────
 G.CAST = {
-  k_slash(p, a) { G.slash(p, a, 80, 1.0, p.atk, '#dfe6f0'); },
+  k_slash(p, a) { G.slash(p, a, 96, 1.0, p.atk, '#dfe6f0'); },
   k_charge(p, a) {
     p.dash = { vx: Math.cos(a) * 640, vy: Math.sin(a) * 640, t: 0.22, hit: new Set(), dmg: p.atk * 1.7 };
     p.iframe = Math.max(p.iframe, 0.3);
@@ -174,7 +174,7 @@ G.CAST = {
     p.buff.armor = 6;
     G.ringFx(p.x, p.y, 90, '#ffd84a', 0.5, '+');
   },
-  b_chop(p, a) { G.slash(p, a, 90, 1.15, p.atk * 1.25, '#e0a85e'); },
+  b_chop(p, a) { G.slash(p, a, 106, 1.15, p.atk * 1.25, '#e0a85e'); },
   b_axes(p, a) {
     G.SFX.play('throw');
     for (let i = -1; i <= 1; i++) {
@@ -196,7 +196,7 @@ G.CAST = {
     G.R.shake(8); G.SFX.play('boss');
   },
   b_whirl(p) { p.whirl = 2.5; p.whirlT = 0; },
-  m_staff(p, a) { G.thrust(p, a, 108, p.atk * 1.05, '#a07a4a', '#ffe8a8'); G.SFX.play('slash'); },
+  m_staff(p, a) { G.thrust(p, a, 126, p.atk * 1.05, '#a07a4a', '#ffe8a8'); G.SFX.play('slash'); },
   m_holy(p, a) {
     const d = Math.min(280, Math.hypot(G.aim.x - p.x, G.aim.y - p.y));
     const tx = p.x + Math.cos(a) * d, ty = p.y + Math.sin(a) * d, fx = p.x, fy = p.y - 20, dur = 0.42;
